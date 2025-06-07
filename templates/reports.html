@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Reports from Reservations{% endblock %}
+{% block content %}
+<h1>Reports from Reservations Detail Data</h1>
+<p>File: {{ file_name }}</p>
+<p>Select from the following report options</p>
+<h4>Placards for Arrival Date</h4>
+<ul>
+    {% for date in arrival_dates %}
+        <li>
+            <a href="{{ url_for('placards', file_path=file_path, arrival_date=date) }}">{{ date }}</a>
+        </li>
+    {% endfor %}
+</ul>
+{% endblock %}
+

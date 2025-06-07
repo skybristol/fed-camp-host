@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}Reservation File Upload{% endblock %}
+{% block content %}
+<h1>Upload Reservation Detail Spreadsheet</h1>
+<p>The reservations functionality works with the Camping Reservation Detail Report (non-PII) downloaded from manage.recreation.gov ("The Hub"). Use the form below to upload a file from your computer.</p>
+<form method="post" enctype="multipart/form-data">
+    <label for="file">Upload Spreadsheet:</label>
+    <input type="file" id="file" name="file" required>
+    <button type="submit">Upload</button>
+</form>
+{% endblock %}
