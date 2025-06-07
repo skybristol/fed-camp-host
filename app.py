@@ -20,16 +20,16 @@ if not os.path.exists(UPLOAD_FOLDER):
     
 @app.route('/')
 def main():
-    uuid = request.args.get('uuid')
-    if uuid:
-        if uuid == AUTHORIZED_UUID:
-            session['uuid'] = uuid
-            return redirect(url_for('reservations'))
-        else:
-            return redirect(url_for('main'))
+    # uuid = request.args.get('uuid')
+    # if uuid:
+    #     if uuid == AUTHORIZED_UUID:
+    #         session['uuid'] = uuid
+    #         return redirect(url_for('reservations'))
+    #     else:
+    #         return redirect(url_for('main'))
 
-    if session.get('uuid') != AUTHORIZED_UUID:
-        return redirect(url_for('main'))
+    # if session.get('uuid') != AUTHORIZED_UUID:
+    #     return redirect(url_for('main'))
 
     return render_template('instructions.html')
 
