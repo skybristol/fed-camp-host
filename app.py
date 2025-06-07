@@ -22,24 +22,25 @@ if not os.path.exists(UPLOAD_FOLDER):
 @app.route('/')
 def main():
     uuid = request.args.get('uuid')
-    # if uuid:
-    #     if uuid == AUTHORIZED_UUID:
-    #         session['uuid'] = uuid
-    #         return redirect(url_for('reservations'))
-    #     else:
-    #         return redirect(url_for('main'))
+    if uuid:
+        if uuid == AUTHORIZED_UUID:
+            session['uuid'] = uuid
+            return jsonify(
+                {
+                    "auth_uuid": AUTHORIZED_UUID, 
+                    'arg_uuid': uuid,
+                    'session_uuid': session.get('uuid'),
+                    'match': session.get('uuid') == AUTHORIZED_UUID if uuid else False,
+                }
+            )
+            # return redirect(url_for('reservations'))
+        else:
+            return redirect(url_for('main'))
 
-    # if session.get('uuid') != AUTHORIZED_UUID:
-    #     return redirect(url_for('main'))
+    if session.get('uuid') != AUTHORIZED_UUID:
+        return redirect(url_for('main'))
 
-    return jsonify(
-        {
-            "auth_uuid": AUTHORIZED_UUID, 
-            'arg_uuid': uuid,
-            'match': uuid == AUTHORIZED_UUID if uuid else False,
-        }
-    )
-    # return render_template('instructions.html')
+    return render_template('instructions.html')
 
 @app.route('/test', methods=['GET'])
 def test():
