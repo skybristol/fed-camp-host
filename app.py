@@ -25,15 +25,7 @@ def main():
     if uuid:
         if uuid == AUTHORIZED_UUID:
             session['uuid'] = uuid
-            return jsonify(
-                {
-                    "auth_uuid": AUTHORIZED_UUID, 
-                    'arg_uuid': uuid,
-                    'session_uuid': session.get('uuid'),
-                    'match': session.get('uuid') == AUTHORIZED_UUID if uuid else False,
-                }
-            )
-            # return redirect(url_for('reservations'))
+            return redirect(url_for('reservations'))
         else:
             return redirect(url_for('main'))
 
