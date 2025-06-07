@@ -4,14 +4,15 @@ from pyfedcamp import Reservations
 import datetime
 
 app = Flask(__name__)
-app.secret_key = os.getenv('APP_SECRET')  # Replace with a secure key
+app.secret_key = os.getenv('APP_SECRET')
 
 # Shared UUID for authentication
-AUTHORIZED_UUID = os.getenv('AUTHORIZED_UUID')  # Set this in your environment variables
+AUTHORIZED_UUID = os.getenv('AUTHORIZED_UUID')
 
-UPLOAD_FOLDER = os.path.join(os.getcwd(), 'uploads')  # Save files in a folder named 'uploads'
+UPLOAD_FOLDER = os.path.join(os.getcwd(), 'uploads')
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-DOWNLOAD_FOLDER = os.path.join(os.getcwd(), 'downloads')  # Folder for processed files
+
+DOWNLOAD_FOLDER = os.path.join(os.getcwd(), 'downloads')
 app.config['DOWNLOAD_FOLDER'] = DOWNLOAD_FOLDER
 
 # Ensure the folder exists
@@ -20,7 +21,7 @@ if not os.path.exists(UPLOAD_FOLDER):
     
 @app.route('/')
 def main():
-    # uuid = request.args.get('uuid')
+    uuid = request.args.get('uuid')
     # if uuid:
     #     if uuid == AUTHORIZED_UUID:
     #         session['uuid'] = uuid
@@ -31,7 +32,8 @@ def main():
     # if session.get('uuid') != AUTHORIZED_UUID:
     #     return redirect(url_for('main'))
 
-    return render_template('instructions.html')
+    return jsonify({"uuid": AUTHORIZED_UUID})
+    # return render_template('instructions.html')
 
 @app.route('/test', methods=['GET'])
 def test():
