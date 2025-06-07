@@ -3,14 +3,15 @@
 {% block content %}
 <h1>Reports from Reservations Detail Data</h1>
 <p>File: {{ file_name }}</p>
-<p>Select from the following report options</p>
-<h4>Placards for Arrival Date</h4>
-<ul>
-    {% for date in arrival_dates %}
-        <li>
-            <a href="{{ url_for('placards', file_path=file_path, arrival_date=date) }}">{{ date }}</a>
-        </li>
+{% for section, files in sectioned_files.items() %}
+  <h3>{{ section|capitalize }}</h3>
+  <ul>
+    {% for rel_file in files %}
+      <li>
+        {{ rel_file.split('/')[-1].rsplit('.', 1)[0] }}
+        <a href="{{ url_for('download_file', filepath=rel_file) }}" class="btn btn-sm btn-primary ms-2">Download</a>
+      </li>
     {% endfor %}
-</ul>
+  </ul>
+{% endfor %}
 {% endblock %}
-
