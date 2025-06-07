@@ -7,8 +7,29 @@
     <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
 </head>
 <body>
+    <!-- Top Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light mb-4">
+        <div class="container-fluid">
+            <a class="navbar-brand d-flex align-items-center" href="{{ url_for('main') }}">
+                <img src="{{ url_for('static', filename='FedCampHost.png') }}" alt="Logo" width="118" height="45" class="me-2">
+                <span class="fw-bold">Fed Camp Host</span>
+            </a>
+            <!-- Menu placeholder -->
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/skybristol/fed-camp-host" target="_blank">Web app source code</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/sky-builds/pyfedcamp" target="_blank">pyFedCamp</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
     <div class="container mt-5">
         {% block content %}{% endblock %}
     </div>
+    {% block scripts %}{% endblock %}
 </body>
 </html>

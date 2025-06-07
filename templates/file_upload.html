@@ -2,10 +2,42 @@
 {% block title %}Reservation File Upload{% endblock %}
 {% block content %}
 <h1>Upload Reservation Detail Spreadsheet</h1>
-<p>The reservations functionality works with the Camping Reservation Detail Report (non-PII) downloaded from manage.recreation.gov ("The Hub"). Use the form below to upload a file from your computer.</p>
+<p>
+    The reservations functionality works with the Camping Reservation Detail Report (non-PII) downloaded from manage.recreation.gov ("The Hub"). Use the form below to upload a file from your computer.
+</p>
+<button id="toggle-instructions-btn" type="button" class="btn btn-secondary mb-2" onclick="toggleInstructions()">Show Instructions</button>
+<div id="detailed-instructions" style="display:none; margin-bottom: 1em;">
+    <h4>How to Download the Correct Report</h4>
+    <ol>
+        <li>Log in to <a href="https://manage.recreation.gov" target="_blank">manage.recreation.gov</a>.</li>
+        <li>Navigate to the "Reports & Dashboards" section.</li>
+        <li>Click "Camping Reservation Detail Report".</li>
+        <li>Set the date range for the report to include all reservations you want to analyze (e.g., single date for printing day-of arrival placards).</li>
+        <li>Click "Run Excel" to download the file.</li>
+        <li>Upload your downloaded Excel file via the form on this page.</li>
+    </ol>
+    <img src="{{ url_for('static', filename='CampingReservationDetailReport.png') }}" alt="Report menu screenshot" class="img-fluid mb-2">
+    <img src="{{ url_for('static', filename='CampingReservationDetailReport_options.png') }}" alt="Camping reservation detail report options" class="img-fluid mb-2">
+</div>
+<h4>Upload Spreadsheet</h4>
 <form method="post" enctype="multipart/form-data">
-    <label for="file">Upload Spreadsheet:</label>
     <input type="file" id="file" name="file" required>
     <button type="submit">Upload</button>
 </form>
+{% endblock %}
+
+{% block scripts %}
+<script>
+function toggleInstructions() {
+    var details = document.getElementById('detailed-instructions');
+    var btn = document.getElementById('toggle-instructions-btn');
+    if (details.style.display === "none") {
+        details.style.display = "block";
+        btn.textContent = "Hide Instructions";
+    } else {
+        details.style.display = "none";
+        btn.textContent = "Show Instructions";
+    }
+}
+</script>
 {% endblock %}
