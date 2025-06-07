@@ -1,9 +1,7 @@
 from flask import Flask, request, jsonify, session, redirect, url_for, render_template, send_from_directory
 import os
-import pandas as pd
 from pyfedcamp import Reservations
 import datetime
-import json
 
 app = Flask(__name__)
 app.secret_key = os.getenv('APP_SECRET')  # Replace with a secure key
