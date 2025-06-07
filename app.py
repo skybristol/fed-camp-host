@@ -32,7 +32,7 @@ def main():
     # if session.get('uuid') != AUTHORIZED_UUID:
     #     return redirect(url_for('main'))
 
-    return jsonify({"uuid": AUTHORIZED_UUID})
+    return jsonify({"auth_uuid": AUTHORIZED_UUID, 'arg_uuid': uuid})
     # return render_template('instructions.html')
 
 @app.route('/test', methods=['GET'])
