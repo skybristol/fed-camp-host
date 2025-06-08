@@ -96,6 +96,16 @@ def reports():
 
     file_path = session.get('file_path')
 
+    # Create Reservations object and get monthly_summary
+    r = Reservations(input_file=file_path)
+    monthly_summary_html = None
+    if hasattr(r, 'monthly_summary') and not r.monthly_summary.empty:
+        # Convert DataFrame to HTML table with Bootstrap classes
+        monthly_summary_df = r.monthly_summary.reset_index()
+        monthly_summary_df.columns.name = None
+        
+        monthly_summary_html = monthly_summary_df.to_html(classes="table table-striped table-bordered", index=False)
+
     download_root = app.config['DOWNLOAD_FOLDER']
     sectioned_files = {}
 
@@ -118,7 +128,8 @@ def reports():
         'reports.html',
         file_path=file_path,
         file_name=os.path.basename(file_path),
-        sectioned_files=sectioned_files
+        sectioned_files=sectioned_files,
+        monthly_summary_html=monthly_summary_html,
     )
 
 @app.route('/downloads/<path:filepath>')

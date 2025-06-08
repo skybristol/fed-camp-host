@@ -14,4 +14,11 @@
     {% endfor %}
   </ul>
 {% endfor %}
+
+{% if monthly_summary_html %}
+  <h2>Monthly Summary</h2>
+  <div class="table-responsive">
+    {{ monthly_summary_html|safe }}
+  </div>
+{% endif %}
 {% endblock %}
