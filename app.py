@@ -69,7 +69,11 @@ def upload():
 
             # Build reports 
             today = datetime.date.today()
-            arrival_dates = r.res_df[r.res_df['Arrival Date'].dt.date >= today]['Arrival Date'].dt.date.unique()
+            arrival_dates = r.res_df[
+                (r.res_df['Reservation Status'] == 'RESERVED')
+                &
+                (r.res_df['Arrival Date'].dt.date >= today)
+            ]['Arrival Date'].dt.date.unique()
             if arrival_dates.size > 0:
                 for arrival_date in arrival_dates:
                     Reservations(
